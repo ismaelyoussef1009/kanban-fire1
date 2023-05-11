@@ -1,0 +1,71 @@
+.mat-toolbar{
+    // background-color: rgba(30, 7, 159, 0.811);
+    padding: 1.5em;
+    color: white;
+    gap: 16px;
+
+    .mat-icon{
+        font-size: 22px;
+    }
+
+    span{
+        font-size: 21px;
+    }
+}
+
+mat-toolbar {
+    margin-bottom: 20px;
+    
+  }
+  
+  mat-toolbar > span {
+    margin-left: 10px;
+  }
+  
+  .content-wrapper {
+    max-width: 1400px;
+    margin: auto;
+    font-weight: bold;
+    button{
+        margin-left: 23px;
+        font-weight: 600;
+    }
+  }
+  
+  .container-wrapper {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .container {
+    width: 450px;
+    height: 32vh;
+    border-radius: 5px;
+    margin: 0 25px 25px 0;
+  }
+  
+  .list {
+    border: solid 1px #ccc;
+    min-height: 80px;
+    border-radius: 4px;
+  }
+  
+  app-new-task {
+    margin-bottom: 30px;
+    background-color: red;
+  }
+  
+  .empty-label {
+    font-size: 2em;
+    padding-top: 10px;
+    text-align: center;
+    opacity: 0.2;
+  }
+
+  .cdk-drag-animating {
+    transition: transform 250ms;
+  }
+  
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
