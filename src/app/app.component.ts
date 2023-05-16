@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { Task } from './task/task';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
-import { TaskDialogComponent, TaskDialogResult } from './task-dialog/task-dialog.component';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  TaskDialogComponent
+} from './task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +13,7 @@ import { TaskDialogComponent, TaskDialogResult } from './task-dialog/task-dialog
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
   title = 'kanban-fire';
   todo: Task[] = [
     {
@@ -33,18 +37,20 @@ export class AppComponent {
         enableDelete: true,
       },
     });
-    dialogRef.afterClosed().subscribe((result: TaskDialogResult|undefined) => {
-      if (!result) {
-        return;
-      }
-      const dataList = this[list];
-      const taskIndex = dataList.indexOf(task);
-      if (result.delete) {
-        dataList.splice(taskIndex, 1);
-      } else {
-        dataList[taskIndex] = task;
-      }
-    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogResult | undefined) => {
+        if (!result) {
+          return;
+        }
+        const dataList = this[list];
+        const taskIndex = dataList.indexOf(task);
+        if (result.delete) {
+          dataList.splice(taskIndex, 1);
+        } else {
+          dataList[taskIndex] = task;
+        }
+      });
   }
 
   drop(event: CdkDragDrop<Task[]>): void {
@@ -60,11 +66,9 @@ export class AppComponent {
       event.previousIndex,
       event.currentIndex
     );
-
-    
   }
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private store: AngularFirestore) { }
 
   newTask(): void {
     const dialogRef = this.dialog.open(TaskDialogComponent, {
@@ -75,11 +79,15 @@ export class AppComponent {
     });
     dialogRef
       .afterClosed()
-      .subscribe((result: TaskDialogResult|undefined) => {
+      .subscribe((result: TaskDialogResult | undefined) => {
         if (!result) {
           return;
         }
         this.todo.push(result.task);
       });
+  }
 }
+export interface TaskDialogResult {
+  task: Task;
+  delete?: boolean;
 }

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kanbanfire-521ef": {
+      "hosting": {
+        "kanban-fire": [
+          "kanbanfire-521ef"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kanbanfire-521ef"
+  }
+}
